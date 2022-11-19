@@ -40,7 +40,6 @@ run_expr = Expr(
 	cur_nw = Current Window();
 	nw_aa = get_nw_values(cur_nw);
 	col_sort = nw_aa["clbs"][1];
-	col_sort = Try(col_sor[1], "");
 	col_fill = nw_aa["clbs"][2];
 	col_group = nw_aa["clbs"][3];
 	
