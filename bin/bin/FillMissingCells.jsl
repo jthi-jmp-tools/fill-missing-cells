@@ -61,6 +61,11 @@ Define Class("FillMissingCells", BaseClass(GetNearestIndexDistance),
 				lookup_idx = indices[aa["found"]];
 				input_idx = indices[aa["missing"]];
 			);
+			If(N Items(order_column_name) > 0,
+				order_column_name = order_column_name[1];
+			,
+				order_column_name = "";
+			);
 			If(order_column_name == "",
 				vec_lookup = lookup_idx; //use row indices
 				vec_input = input_idx;
@@ -75,7 +80,6 @@ Define Class("FillMissingCells", BaseClass(GetNearestIndexDistance),
 				dt[input_idx, column_to_fill] = Interpolate(vec_input, Sort Ascending(vec_lookup), Sort Ascending(dt[lookup_idx,column_to_fill]));
 				continue();
 			);
-
 			//find indices using GNIDA
 			{rows, dist} = get_nearest_index_distance(vec_lookup, vec_input, direction, lookup_sorted, max_distance);
 			If(fill_unknown == 0 & (Contains(direction, "backward") | Contains(direction, "forward")), //if we don't want to fill unknown, remove them
